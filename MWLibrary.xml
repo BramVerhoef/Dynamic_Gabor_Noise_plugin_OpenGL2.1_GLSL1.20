@@ -1,0 +1,36 @@
+<MWElements>
+  <MWElement name="Dynamic Gabor Noise">
+    <match_signature>stimulus[@type="dynamic_gabor_noise"]</match_signature>
+    
+    <isa>Stimulus</isa>
+    
+    <description>
+      Moving Gabor Noise and a Gabor
+    </description>
+    
+    <!-- Payload -->
+    <code>
+      <stimulus type="dynamic_gabor_noise"
+                tag="Gabor noise"
+                horizontalResolution = "1980"
+                verticalResolution = "1080"
+                viewingDistance = "300"
+                textureSize = "800"
+                noise_nImpulses="5"
+                noise_spatialFrequency="0.1"
+                noise_bandWidth="0.1"
+                noise_timeSpeedUp="0.95"
+                noise_timeSpeedUpSigma="5"
+                azimuth="1.0"
+                elevation="1.0"
+                sigma="3.0"
+                orientation="45.0"
+                spatialFrequency="0.11"
+                phaseOffset="0.0"
+                contrast="1.0"
+                transparency="1.0"
+                autoplay="0"
+                />
+    </code>
+  </MWElement>
+</MWElements>

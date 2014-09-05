@@ -1,0 +1,16 @@
+//
+// Prefix header for all source files of the 'DynamicGaborNoisePlugin' target in the 'DynamicGaborNoise' project.
+//
+
+#include <MWorksCore/glew.h>
+
+#ifdef __OBJC__
+#import <Cocoa/Cocoa.h>
+#endif
+
+#ifdef __cplusplus
+    #include <MWorksCore/ParsedColorTrio.h>
+    #include <MWorksCore/Plugin.h>
+    #include <MWorksCore/StandardDynamicStimulus.h>
+    #include <MWorksCore/StandardStimulusFactory.h>
+#endif
