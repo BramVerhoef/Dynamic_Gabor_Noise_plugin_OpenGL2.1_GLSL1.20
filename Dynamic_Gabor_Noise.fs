@@ -54,7 +54,7 @@ float gabor_noise_kernel_2d(const in float w, const in vec2 f, const in float ph
     return w * g * h;
 }
 
-float gabor_noise_kernel_detect(const in float w, const in vec2 f, const in float phi, const in float a, const in vec2 x)// this kernel has 0.5 instead of pi in the exponent to conform to the normal psychometric Gabors (don't use this one for the Gabor noise because it will mess up the scaling)
+float gabor_noise_kernel_detect(const in float w, const in vec2 f, const in float phi, const in float a, const in vec2 x)
 {
     float g = exp(-0.5 * (a * a) * dot(x, x));
     float h = sin((2.0 * pi * dot(f, x)) + phi);
@@ -109,7 +109,7 @@ float gabor_noise_2d_cell(const in gabor_noise_2d this_, const in ivec2 c, const
     uint n = gabor_noise_impulses;
     float sum = 0.0;
     for (uint i = 0u; i < n; ++i) {
-        float indexf = currentCellInArray + i; // run through the vec4 corresponding to each impulse
+        float indexf = currentCellInArray + i;
         uint index    = uint(indexf);
         
         vec2 x_i_c = vec2(impulseParam[index][0], impulseParam[index][1]);
@@ -130,24 +130,24 @@ float gabor_noise_2d_cell(const in gabor_noise_2d this_, const in ivec2 c, const
 
 float gabor_noise_2d_grid(const in gabor_noise_2d this_, const in vec2 x_g, const in float t)
 {
-    vec2 int_x_g = floor(x_g); // integer cell indices
+    vec2 int_x_g = floor(x_g);
     ivec2 c = ivec2(int_x_g);
-    vec2 x_c = x_g - int_x_g; // fractional cell indices
+    vec2 x_c = x_g - int_x_g;
     float sum = 0.0;
     ivec2 i;
-    for (i[1] = -1; i[1] <= +1; ++i[1]) { // check the surrounding cells
+    for (i[1] = -1; i[1] <= +1; ++i[1]) {
         for (i[0] = -1; i[0] <= +1; ++i[0]) {
             ivec2 c_i = c + i;
             vec2 x_c_i = x_c - i;
-            sum += gabor_noise_2d_cell(this_, c_i, x_c_i, t);// noise within 1 kernel_radius (i.e. from some of the surrounding cells) can still influence the noise value because it's a convolution with a trucated Gabor
+            sum += gabor_noise_2d_cell(this_, c_i, x_c_i, t);/
         }
     }
-    return sum / sqrt(this_.lambda_); // devision is related to normalization by the variance
+    return sum / sqrt(this_.lambda_);
 }
 
 float gabor_noise_2d_noise(const in gabor_noise_2d this_, const in vec2 x, const in float t)
 {
-    vec2 x_g = x / this_.r_; // coordinates in units of Gabor radius
+    vec2 x_g = x / this_.r_;
     return gabor_noise_2d_grid(this_, x_g, t);
 }
 
@@ -165,9 +165,9 @@ float detection_gabor_alpha;
 
 void main()
 {
-    gabor_noise_2d gabor_noise_2d_; //Make the gabor_noise_2d_ structure
-    gabor_noise_2d_constructor(gabor_noise_2d_, gabor_noise_2d_r, gabor_noise_2d_a, gabor_noise_2d_f, gabor_noise_2d_lambda); // initialize the structure with the values given by the client program
-    float noise = gabor_noise_2d_noise(gabor_noise_2d_, x_tex.xy, gabor_noise_2d_time); // Get the noise value for this fragment (procedural texel)
+    gabor_noise_2d gabor_noise_2d_;
+    gabor_noise_2d_constructor(gabor_noise_2d_, gabor_noise_2d_r, gabor_noise_2d_a, gabor_noise_2d_f, gabor_noise_2d_lambda);
+    float noise = gabor_noise_2d_noise(gabor_noise_2d_, x_tex.xy, gabor_noise_2d_time);
     float noise_scale = 0.5 / (3.0 * sqrt(gabor_noise_2d_variance(gabor_noise_2d_)));
     float noise_bias = 0.5;
     float noise_intensity = noise_bias + (noise_scale * noise);

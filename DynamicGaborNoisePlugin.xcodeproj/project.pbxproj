@@ -310,6 +310,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = DynamicGaborNoisePlugin_Prefix.pch;
 				INFOPLIST_FILE = "DynamicGaborNoisePlugin-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = DynamicGaborNoisePlugin;
 				WRAPPER_EXTENSION = bundle;
 			};
